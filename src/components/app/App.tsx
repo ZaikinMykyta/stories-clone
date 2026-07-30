@@ -2,26 +2,22 @@ import { useEffect, useRef, useState } from 'react';
 import StoriesList from '../StoriesList/StoriesList';
 import changeFile from '../../services/changeFile';
 import ShowStory from '../ShowStory/ShowStory';
+import StorageBanner from '../StorageBanner/StorageBanner';
+import { loadStories, saveStories } from '../../services/storyStorage';
 import type { IStory } from '../../types/interfaces';
+
+const QUOTA_MESSAGE =
+    'Storage is full. New stories will work until you refresh, but won\'t be saved. Try using a smaller photo or clear old browser data.';
 
 function App() {
     const [vidArr, setVidArr] = useState<IStory[]>([]);
     const [currentId, setCurrentId] = useState('');
     const [startId, setStartId] = useState('');
+    const [storageError, setStorageError] = useState<string | null>(null);
     const isFirstRender = useRef(true);
 
     useEffect(() => {
-        const stories = localStorage.getItem('story');
-        if (!stories) return;
-
-        const DAY = 24 * 60 * 60 * 1000;
-        const parsed: IStory[] = JSON.parse(stories);
-        const validStories = parsed.filter(
-            story => Date.now() - story.createdAt < DAY
-        );
-
-        setVidArr(validStories);
-        localStorage.setItem('story', JSON.stringify(validStories));
+        setVidArr(loadStories());
     }, []);
 
     useEffect(() => {
@@ -29,8 +25,21 @@ function App() {
             isFirstRender.current = false;
             return;
         }
-        localStorage.setItem('story', JSON.stringify(vidArr));
+
+        const result = saveStories(vidArr);
+        if (!result.ok) {
+            setStorageError(
+                result.reason === 'quota'
+                    ? QUOTA_MESSAGE
+                    : 'Could not save stories. Changes may be lost after refresh.'
+            );
+        }
     }, [vidArr]);
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        changeFile(e, setVidArr);
+        e.target.value = '';
+    };
 
     return (
         <div className="flex min-h-dvh flex-col">
@@ -48,6 +57,13 @@ function App() {
             </header>
 
             <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-5 sm:px-6 sm:py-8">
+                {storageError && (
+                    <StorageBanner
+                        message={storageError}
+                        onDismiss={() => setStorageError(null)}
+                    />
+                )}
+
                 <section className="rounded-2xl border border-white/8 bg-white/[0.03] p-4 shadow-2xl shadow-purple-950/20 backdrop-blur-sm sm:p-6">
                     <p className="mb-4 text-xs font-medium uppercase tracking-widest text-zinc-500">
                         Your stories
@@ -72,7 +88,7 @@ function App() {
                                 type="file"
                                 accept=".png,.jpg,.jpeg"
                                 className="hidden"
-                                onChange={(e) => changeFile(e, setVidArr)}
+                                onChange={handleFileChange}
                             />
                         </label>
 
