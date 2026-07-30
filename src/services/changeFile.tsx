@@ -35,8 +35,8 @@ const changeFile = (
                     height = MAX_HEIGHT;
                 }
 
-                canvas.width = width;
-                canvas.height = height;
+                canvas.width = Math.round(width);
+                canvas.height = Math.round(height);
                 ctx.drawImage(img, 0, 0, width, height);
 
                 const resized = canvas.toDataURL('image/jpeg', 0.8);
