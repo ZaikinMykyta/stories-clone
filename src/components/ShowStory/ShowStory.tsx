@@ -79,7 +79,7 @@ const ShowStory = (props: StoryProps) => {
                                 onClick={(e) => {e.stopPropagation()}}
                             >
                                 <div className="absolute top-0 left-0 right-0 z-20 p-3 bg-black/[0.25] gap-2 flex">
-                                    {props.vidArr.slice(startIndex).map((item, i) => {
+                                    {props.vidArr.slice(startIndex).map((_, i) => {
                                         let width = 0;
                                         const relativeIndex = currentIndex - startIndex;
 
