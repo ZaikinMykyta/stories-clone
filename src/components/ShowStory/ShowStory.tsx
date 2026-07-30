@@ -82,7 +82,6 @@ const ShowStory = (props: StoryProps) => {
                 className="animate-scale-in relative h-dvh w-full max-w-none overflow-hidden bg-black sm:aspect-[9/16] sm:h-auto sm:max-h-[90dvh] sm:max-w-[420px] sm:rounded-2xl sm:shadow-2xl sm:shadow-black/60 sm:ring-1 sm:ring-white/10"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Progress bars */}
                 <div className="absolute inset-x-0 top-0 z-20 flex gap-1 px-3 pb-8 pt-[max(0.75rem,env(safe-area-inset-top))] sm:gap-1.5 sm:px-4 sm:pt-4">
                     <div
                         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/60 to-transparent"
@@ -112,7 +111,6 @@ const ShowStory = (props: StoryProps) => {
                     })}
                 </div>
 
-                {/* Header */}
                 <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-3 pt-[max(2.5rem,calc(env(safe-area-inset-top)+1.75rem))] sm:px-4 sm:pt-12">
                     <div className="flex items-center gap-2.5">
                         <div className="story-ring-unwatched size-9 rounded-full p-[2px] sm:size-10">
@@ -140,7 +138,6 @@ const ShowStory = (props: StoryProps) => {
                     </button>
                 </div>
 
-                {/* Tap zones */}
                 <button
                     type="button"
                     className="absolute bottom-0 left-0 top-0 z-20 w-1/3 cursor-pointer border-none bg-transparent p-0 sm:w-1/4"
@@ -154,7 +151,6 @@ const ShowStory = (props: StoryProps) => {
                     aria-label="Next story"
                 />
 
-                {/* Story image */}
                 <button
                     type="button"
                     className="relative z-10 flex size-full cursor-pointer items-center justify-center border-none bg-black p-0"
@@ -177,7 +173,6 @@ const ShowStory = (props: StoryProps) => {
                     )}
                 </button>
 
-                {/* Desktop nav hints */}
                 <div className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-1/4 items-center justify-start pl-3 sm:flex">
                     <span className="rounded-full bg-black/40 px-2 py-1 text-2xl text-white/50 backdrop-blur-sm">
                         ‹
