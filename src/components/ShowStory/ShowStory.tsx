@@ -11,7 +11,7 @@ const ShowStory = (props: StoryProps) => {
     const [isPaused, setIsPaused] = useState(false);
 
     useEffect(()=>{
-        if(props.id == "" || isPaused) return;
+        if(props.id === "" || isPaused) return;
         
         const progressInterval = setInterval(() => {
             setProgressBar(num => num+1)
@@ -34,7 +34,7 @@ const ShowStory = (props: StoryProps) => {
         }
 
         setWatched();
-    }, [progressbar])
+    }, [progressbar, props.id, currentIndex, props.vidArr])
 
     const setWatched = () => {
         props.setVidArr((arr: IStory[]): IStory[] => {
@@ -92,7 +92,7 @@ const ShowStory = (props: StoryProps) => {
                                         return (
                                             <div 
                                             key={i}
-                                            className={`h-1 w-[${100 / props.vidArr.length}%] flex-1 z-21 rounded-full bg-white/30`}>
+                                            className={`h-1 flex-1 z-21 rounded-full bg-white/30`}>
                                                 <div className="h-full rounded-full bg-white" 
                                                      style={{width: `${width}%`}}/>
                                             </div>

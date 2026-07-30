@@ -30,7 +30,7 @@ const changeFile = (e: React.ChangeEvent<HTMLInputElement>, setVidArr: React.Dis
                 }
 
                 if(height > MAX_HEIGHT) {
-                    width = width * (MAX_WIDTH / width);
+                    width = width * (MAX_WIDTH / height);
                     height = MAX_HEIGHT;
                 }
 

@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
-import StroiesList from '../StoriesList/StoriesList';
+import StoriesList from '../StoriesList/StoriesList';
 import changeFile from '../../services/changeFile';
 import ShowStory from '../ShowStory/ShowStory';
 import type { IStory } from '../../types/interfaces';
@@ -51,7 +51,7 @@ function App() {
                     onChange={(e) => {changeFile(e, setVidArr)}}>
                     </input>
                 </label>
-                <StroiesList vidArr={vidArr} setStartId={setStartId} setCurrentId={setCurrentId}/>
+                <StoriesList vidArr={vidArr} setStartId={setStartId} setCurrentId={setCurrentId}/>
                 {story}
             </div>
         </div>
